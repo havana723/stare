@@ -5,8 +5,8 @@ const MetaContainer = styled.div`
   position: fixed;
   right: 32px;
   bottom: 32px;
-  width: 320px;
-  height: 160px;
+  width: 480px;
+  height: 320px;
   max-width: 40vw;
   max-height: 20vw;
   color: #0000004b;
@@ -15,11 +15,14 @@ const MetaContainer = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 2000;
+  pointer-events: none;
 `;
 
-const MeatTextContainer = styled.div`
-  color: white;
-  text-align: center;
+const MetaImgContainer = styled.img`
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+  object-fit: cover;
 `;
 
 const StarMetaDisplay: React.FC = () => {
@@ -30,7 +33,7 @@ const StarMetaDisplay: React.FC = () => {
     <>
       {hoverStar && hoverStar.id !== "" ? (
         <MetaContainer>
-          <MeatTextContainer>{hoverStar.id}</MeatTextContainer>
+          <MetaImgContainer src={`/img/img${(+hoverStar.id % 11) + 1}.jpg`} />
         </MetaContainer>
       ) : null}
     </>

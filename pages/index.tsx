@@ -6,9 +6,13 @@ import ColorFader from "../components/ColorFader";
 import Galaxy from "../components/Galaxy";
 import StarMetaDisplay from "../components/StarMetaDisplay";
 import { GalaxyContextProvider } from "../contexts/GalaxyContext";
+import database2 from "../scripts/reduced2.json";
 import { StarAttr } from "../types/Star";
 
-const Home: NextPage<{ database: StarAttr[] }> = ({ database }) => {
+const Home: NextPage<{ database: StarAttr[]; database2: StarAttr[] }> = ({
+  database,
+  database2,
+}) => {
   return (
     <>
       <Global
@@ -21,7 +25,7 @@ const Home: NextPage<{ database: StarAttr[] }> = ({ database }) => {
           }
         `}
       />
-      <GalaxyContextProvider database={database}>
+      <GalaxyContextProvider database={database} database2={database2}>
         <Canvas dpr={[1, 2]}>
           <Galaxy />
         </Canvas>
@@ -40,6 +44,7 @@ export const getStaticProps = async () => {
     return {
       props: {
         database: database.data,
+        database2: database2,
       },
     };
   } catch (err) {

@@ -3,9 +3,9 @@ import {
   PerspectiveCamera,
   TrackballControls,
 } from "@react-three/drei";
-import { extend, Object3DNode, useFrame } from "@react-three/fiber";
+import { Object3DNode, extend, useFrame } from "@react-three/fiber";
 import { Suspense, useEffect, useRef, useState } from "react";
-import * as three from "three";
+import THREE, * as three from "three";
 import {
   CopyShader,
   RenderPass,
@@ -14,6 +14,7 @@ import {
 } from "three-stdlib";
 import Comet from "./Comet";
 import Stars from "./Stars";
+import StarsWithPhoto from "./StarsWithPhoto";
 
 declare module "@react-three/fiber" {
   interface ThreeElements {
@@ -37,6 +38,7 @@ const Scene: React.FC<SceneProps> = (props) => {
         <shaderPass args={[CopyShader]} />
       </Effects>
       <Stars />
+      <StarsWithPhoto />
       {[...Array(lineCount)].map((x, i) => {
         return <Comet key={i} />;
       })}
@@ -50,6 +52,8 @@ const Galaxy: React.FC = () => {
 
   const controlRef = useRef<TrackballControlsImpl>(null);
   const cameraRef = useRef<three.PerspectiveCamera>(null);
+  const sceneRef = useRef<THREE.Scene>();
+  const rendererRef = useRef<THREE.WebGLRenderer>();
 
   const elapsedTime = useRef<number>(0);
 
